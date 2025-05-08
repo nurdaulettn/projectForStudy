@@ -1,6 +1,9 @@
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -95,8 +98,14 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
+    # 'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
 ]
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('googleKey')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('googleSecret')
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI='https://mysite.com:8000/social-auth/complete/google-oauth2/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
